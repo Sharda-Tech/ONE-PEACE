@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'COCOStuffDataset'
-data_root = '/datasets/COCO'
+data_root = '/content/ONE-PEACE/one_peace_vision/seg/datasets/COCO'
 img_norm_cfg = dict(
     mean=[122.771, 116.746, 104.094], std=[68.5, 66.632, 70.323], to_rgb=True)
 crop_size = (512, 512)
@@ -32,8 +32,8 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=4,
-    workers_per_gpu=4,
+    samples_per_gpu=2,
+    workers_per_gpu=2,
     train=dict(
         type=dataset_type,
         data_root=data_root,

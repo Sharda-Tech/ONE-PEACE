@@ -190,7 +190,9 @@ def main():
 
     # build the dataloader
     # TODO: support multiple images per gpu (only minor changes are needed)
+    print("Test",cfg.data.test)
     dataset = build_dataset(cfg.data.test)
+    print("Dataset Build")
     # The default loader config
     loader_cfg = dict(
         # cfg.gpus will be ignored if distributed
@@ -217,10 +219,12 @@ def main():
     # build the model and load checkpoint
     cfg.model.train_cfg = None
     model = build_segmentor(cfg.model, test_cfg=cfg.get('test_cfg'))
+    print("Model loaded")
     fp16_cfg = cfg.get('fp16', None)
     if fp16_cfg is not None:
         wrap_fp16_model(model)
     checkpoint = load_checkpoint(model, args.checkpoint, map_location='cpu')
+    print("Checkpoint loaded")
     if 'CLASSES' in checkpoint.get('meta', {}):
         model.CLASSES = checkpoint['meta']['CLASSES']
     else:
